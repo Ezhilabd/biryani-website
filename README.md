@@ -1,2 +1,2 @@
 # biryani-website
-responsive website. I use html ,css ,js ,bootstrsap
+responsive website. I use html ,css ,js .
