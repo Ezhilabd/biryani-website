@@ -24,7 +24,7 @@ nav {
     padding: 10px;
     border-radius: 10px;
     position: fixed;
-    top: 15px;
+    top: 5px;
     color: white;
     background-color: darkred;
     z-index: 1000;
@@ -192,7 +192,7 @@ header {
 }
 
 .of1>h1 {
-    font-size: 120px;
+    font-size: 90px;
     font-weight: 900;
     color: white;
 }
@@ -597,7 +597,7 @@ article>h1 {
         font-size: 35px;
         padding: 0px;
         /* width: 100%; */
-        width: 350px;
+        width: 300px;
     }
 }
 
@@ -668,7 +668,7 @@ article>h1 {
     width: 100%;
     background-color: white;
     margin-top: 150px;
-    clip-path: polygon(48% 9%, 80% 5%, 100% 0, 100% 100%, 78% 94%, 51% 92%, 23% 95%, 0 100%, 0 0, 21% 6%);
+    /* clip-path: polygon(48% 9%, 80% 5%, 100% 0, 100% 100%, 78% 94%, 51% 92%, 23% 95%, 0 100%, 0 0, 21% 6%); */
     position: relative;
 }
 
@@ -737,6 +737,10 @@ article>h1 {
     .aani{
         right: -45%;
         display: none;
+    }
+    .sec3>h1{
+        font-size: 30px;
+        
     }
 }
 /* ----------------------------------------------------------- */
@@ -901,6 +905,10 @@ li{
     right: 0;
     top: 7px;
     font-size: 30px;
+}
+ol{
+    list-style-type: none;
+
 }
 @media only screen and (max-width:1000px){
     footer{

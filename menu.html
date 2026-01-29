@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spicy Biryani Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #8B0000; /* Dark red background */
+            color: #FFF;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #FFD700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #FFA07A;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        .menu-section {
+            margin-bottom: 30px;
+            background-color: rgba(139, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #FFD700;
+        }
+
+        .section-title {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #666;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #FFF;
+        }
+
+        .item-desc {
+            color: #DDD;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .item-price {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+
+        .spice-level {
+            display: flex;
+            margin-top: 5px;
+        }
+
+        .spice-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #444;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        .spice-dot.active {
+            background-color: #FF4500;
+        }
+
+        .order-btn {
+            background-color: #FFD700;
+            color: #8B0000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 5px;
+            transition: all 0.3s;
+        }
+
+        .order-btn:hover {
+            background-color: #FFA500;
+            transform: scale(1.05);
+        }
+
+        .cart {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 2px solid #FFD700;
+        }
+
+        .cart h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        #cart-items {
+            min-height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.3rem;
+            padding-top: 15px;
+            border-top: 2px solid #444;
+            color: #FFD700;
+        }
+
+        .cart-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .cart-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 48%;
+        }
+
+        #clear-cart {
+            background-color: #666;
+            color: white;
+        }
+
+        #checkout {
+            background-color: #FFD700;
+            color: #8B0000;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+            }
+            
+            .item-price {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Spicy Biryani House 🔥</h1>
+            <p class="tagline">Authentic biryani made with secret spices</p>
+        </header>
+
+        <div class="menu-section">
+            <h2 class="section-title">🍗 Chicken Biryani</h2>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Hyderabadi Dum Biryani</div>
+                    <div class="item-desc">Slow-cooked with marinated chicken and basmati rice</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot"></div>
+                    </div>
+                    <button class="order-btn" data-item="Hyderabadi Dum Biryani" data-price="12.99">Add to Cart - $12.99</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Chicken Tikka Biryani</div>
+                    <div class="item-desc">Tandoori chicken tikka pieces with fragrant rice</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                    </div>
+                    <button class="order-btn" data-item="Chicken Tikka Biryani" data-price="13.99">Add to Cart - $13.99</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="section-title">🐑 Mutton Biryani</h2>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Lucknowi Mutton Biryani</div>
+                    <div class="item-desc">Tender mutton with aromatic spices and saffron rice</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot"></div>
+                        <div class="spice-dot"></div>
+                    </div>
+                    <button class="order-btn" data-item="Lucknowi Mutton Biryani" data-price="15.99">Add to Cart - $15.99</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Spicy Kolhapuri Mutton Biryani</div>
+                    <div class="item-desc">Extra spicy with Kolhapuri masala</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                    </div>
+                    <button class="order-btn" data-item="Spicy Kolhapuri Mutton Biryani" data-price="16.99">Add to Cart - $16.99</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="section-title">🥦 Veg Biryani</h2>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Vegetable Biryani</div>
+                    <div class="item-desc">Mixed vegetables with aromatic spices</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot"></div>
+                        <div class="spice-dot"></div>
+                        <div class="spice-dot"></div>
+                    </div>
+                    <button class="order-btn" data-item="Vegetable Biryani" data-price="10.99">Add to Cart - $10.99</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Paneer Biryani</div>
+                    <div class="item-desc">Cottage cheese cubes with fragrant rice</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot"></div>
+                        <div class="spice-dot"></div>
+                    </div>
+                    <button class="order-btn" data-item="Paneer Biryani" data-price="11.99">Add to Cart - $11.99</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="section-title">🦐 Seafood Biryani</h2>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Prawn Biryani</div>
+                    <div class="item-desc">Juicy prawns cooked with basmati rice</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot"></div>
+                        <div class="spice-dot"></div>
+                    </div>
+                    <button class="order-btn" data-item="Prawn Biryani" data-price="17.99">Add to Cart - $17.99</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Fish Biryani</div>
+                    <div class="item-desc">Boneless fish pieces with special spices</div>
+                    <div class="spice-level">
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot active"></div>
+                        <div class="spice-dot"></div>
+                    </div>
+                    <button class="order-btn" data-item="Fish Biryani" data-price="16.99">Add to Cart - $16.99</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart">
+            <h3>🛒 Your Order</h3>
+            <div id="cart-items">
+                <!-- Cart items will appear here -->
+                <!-- < style="text-align: center; color: #888;">Your cart is empty</p> -->
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="total-price">$0.00</span>
+            </div>
+            <div class="cart-buttons">
+                <button class="cart-btn" id="clear-cart">Clear Cart</button>
+                <button class="cart-btn" id="checkout">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">Item added to cart!</div>
+
+    <script>
+        // Shopping cart array
+        let cart = [];
+        
+        // DOM elements
+        const cartItemsContainer = document.getElementById('cart-items');
+        const totalPriceElement = document.getElementById('total-price');
+        const clearCartBtn = document.getElementById('clear-cart');
+        const checkoutBtn = document.getElementById('checkout');
+        const notification = document.getElementById('notification');
+        const orderButtons = document.querySelectorAll('.order-btn');
+        
+        // Add item to cart
+        function addToCart(itemName, price) {
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: itemName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showNotification(`${itemName} added to cart!`);
+        }
+        
+        // Update cart display
+        function updateCartDisplay() {
+            // Clear current cart display
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #888;">Your cart is empty</p>';
+                totalPriceElement.textContent = '$0.00';
+                return;
+            }
+            
+            let total = 0;
+            
+            // Add each cart item
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div>
+                        <div style="font-weight: bold;">${item.name}</div>
+                        <div style="font-size: 0.9rem; color: #aaa;">Qty: ${item.quantity} x $${item.price.toFixed(2)}</div>
+                    </div>
+                    <div>$${itemTotal.toFixed(2)}</div>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+            
+            // Update total price
+            totalPriceElement.textContent = `$${total.toFixed(2)}`;
+        }
+        
+        // Clear cart
+        function clearCart() {
+            cart = [];
+            updateCartDisplay();
+            showNotification('Cart cleared!');
+        }
+        
+        // Checkout function
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            
+            let orderSummary = "Order Summary:\n";
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                orderSummary +=` ${item.name} x${item.quantity}: $${itemTotal.toFixed(2)}\n`;
+            });
+            
+            orderSummary +=` \nTotal: $${total.toFixed(2)}`;
+            
+            alert(orderSummary + "\n\nThank you for your order!");
+            clearCart();
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        // Add event listeners to order buttons
+        orderButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const itemName = this.getAttribute('data-item');
+                const price = parseFloat(this.getAttribute('data-price'));
+                addToCart(itemName, price);
+            });
+        });
+        
+        // Add event listeners to cart buttons
+        clearCartBtn.addEventListener('click', clearCart);
+        checkoutBtn.addEventListener('click', checkout);
+        
+        // Initialize cart display
+        updateCartDisplay();
+    </script>
+</body>
+</html>
